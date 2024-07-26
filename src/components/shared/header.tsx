@@ -1,11 +1,11 @@
 'use client';
 
 import React from 'react';
-import { cn } from '@/lib/utils';
-import { Container } from '@/components/shared';
 import Image from 'next/image';
-import { Button } from '@/components/ui';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
+import { Container, SearchInput } from '@/components/shared';
+import { Button } from '@/components/ui';
 import { ArrowRight, ShoppingCart, User } from 'lucide-react';
 
 interface Props {
@@ -32,6 +32,10 @@ export const Header: React.FC<Props> = ({ className }) => {
 						</div>
 					</div>
 				</Link>
+
+				<div className="mx-10 flex-1">
+					<SearchInput />
+				</div>
 
 				<div className="flex items-center gap-3">
 					<Button
