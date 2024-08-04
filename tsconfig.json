@@ -19,11 +19,11 @@
 		],
 		"paths": {
 			"@/*": ["./src/*"],
-			"@/components/ui": ["./src/components/ui"],
-			"@/components/shared": ["./src/components/shared"],
-			"@/lib/*": ["./src/lib/*"],
-			"@/hooks/*": ["./src/hooks/*"],
-			"@/services/*": ["./src/services/*"],
+			"@/components/ui": ["./src/shared/components/ui"],
+			"@/components/shared": ["./src/shared/components/shared"],
+			"@/lib/*": ["./src/shared/lib/*"],
+			"@/hooks": ["./src/shared/hooks"],
+			"@/services/*": ["./src/shared/services/*"],
 			"@/prisma/*": ["./src/prisma/*"]
 		}
 	},

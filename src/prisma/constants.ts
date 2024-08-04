@@ -30,7 +30,7 @@ export const ingredients = [
 	{
 		name: 'Сыры чеддер и пармезан',
 		price: 79,
-		imageUrl: '/assets/images/ingredients/000D3A22FA54A81411E9AFA69C1FE796',
+		imageUrl: '/assets/images/ingredients/000D3A22FA54A81411E9AFA69C1FE796.png',
 	},
 	{
 		name: 'Острый перец халапеньо',
@@ -40,47 +40,47 @@ export const ingredients = [
 	{
 		name: 'Нежный цыпленок',
 		price: 79,
-		imageUrl: '/assets/images/ingredients/000D3A39D824A82E11E9AFA5B328D35A',
+		imageUrl: '/assets/images/ingredients/000D3A39D824A82E11E9AFA5B328D35A.png',
 	},
 	{
 		name: 'Шампиньоны',
 		price: 59,
-		imageUrl: '/assets/images/ingredients/000D3A22FA54A81411E9AFA67259A324',
+		imageUrl: '/assets/images/ingredients/000D3A22FA54A81411E9AFA67259A324.png',
 	},
 	{
 		name: 'Ветчина',
 		price: 79,
-		imageUrl: '/assets/images/ingredients/000D3A39D824A82E11E9AFA61B9A8D61',
+		imageUrl: '/assets/images/ingredients/000D3A39D824A82E11E9AFA61B9A8D61.png',
 	},
 	{
 		name: 'Пикантная пепперони',
 		price: 79,
-		imageUrl: '/assets/images/ingredients/000D3A22FA54A81411E9AFA6258199C3',
+		imageUrl: '/assets/images/ingredients/000D3A22FA54A81411E9AFA6258199C3.png',
 	},
 	{
 		name: 'Острая чоризо',
 		price: 79,
-		imageUrl: '/assets/images/ingredients/000D3A22FA54A81411E9AFA62D5D6027',
+		imageUrl: '/assets/images/ingredients/000D3A22FA54A81411E9AFA62D5D6027.png',
 	},
 	{
 		name: 'Маринованные огурчики',
 		price: 59,
-		imageUrl: '/assets/images/ingredients/000D3A21DA51A81211E9EA89958D782B',
+		imageUrl: '/assets/images/ingredients/000D3A21DA51A81211E9EA89958D782B.png',
 	},
 	{
 		name: 'Свежие томаты',
 		price: 59,
-		imageUrl: '/assets/images/ingredients/000D3A39D824A82E11E9AFA7AC1A1D67',
+		imageUrl: '/assets/images/ingredients/000D3A39D824A82E11E9AFA7AC1A1D67.png',
 	},
 	{
 		name: 'Красный лук',
 		price: 59,
-		imageUrl: '/assets/images/ingredients/000D3A22FA54A81411E9AFA60AE6464C',
+		imageUrl: '/assets/images/ingredients/000D3A22FA54A81411E9AFA60AE6464C.png',
 	},
 	{
 		name: 'Сочные ананасы',
 		price: 59,
-		imageUrl: '/assets/images/ingredients/000D3A21DA51A81211E9AFA6795BA2A0',
+		imageUrl: '/assets/images/ingredients/000D3A21DA51A81211E9AFA6795BA2A0.png',
 	},
 	{
 		name: 'Итальянские травы',
@@ -90,12 +90,12 @@ export const ingredients = [
 	{
 		name: 'Сладкий перец',
 		price: 59,
-		imageUrl: '/assets/images/ingredients/000D3A22FA54A81411E9AFA63F774C1B',
+		imageUrl: '/assets/images/ingredients/000D3A22FA54A81411E9AFA63F774C1B.png',
 	},
 	{
 		name: 'Кубики брынзы',
 		price: 79,
-		imageUrl: '/assets/images/ingredients/000D3A39D824A82E11E9AFA6B0FFC349',
+		imageUrl: '/assets/images/ingredients/000D3A39D824A82E11E9AFA6B0FFC349.png',
 	},
 	{
 		name: 'Митболы',

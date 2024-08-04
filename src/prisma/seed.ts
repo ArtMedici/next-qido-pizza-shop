@@ -67,8 +67,8 @@ async function up() {
 		data: [
 			// pizza 1
 			{ productId: pizza1.id, pizzaType: 1, price: 329, size: 25 },
-			{ productId: pizza1.id, pizzaType: 1, price: 329, size: 30 },
-			{ productId: pizza1.id, pizzaType: 2, price: 329, size: 30 },
+			{ productId: pizza1.id, pizzaType: 1, price: 579, size: 30 },
+			{ productId: pizza1.id, pizzaType: 2, price: 579, size: 30 },
 			{ productId: pizza1.id, pizzaType: 1, price: 689, size: 35 },
 			{ productId: pizza1.id, pizzaType: 2, price: 689, size: 35 },
 			// pizza 2
