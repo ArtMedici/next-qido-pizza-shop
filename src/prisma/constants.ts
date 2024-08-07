@@ -16,7 +16,7 @@ export const categories = [
 	},
 ];
 
-export const ingredients = [
+export const _ingredients = [
 	{
 		name: 'Сырный бортик',
 		price: 179,
@@ -197,7 +197,7 @@ export const pizza_1 = {
 	imageUrl: '/assets/images/pizza/11EE7D61304FAF5A98A6958F2BB2D260.webp',
 	categoryId: 1,
 	ingredients: {
-		connect: ingredients.slice(0, 5),
+		connect: _ingredients.slice(0, 5),
 	},
 };
 
@@ -206,7 +206,7 @@ export const pizza_2 = {
 	imageUrl: '/assets/images/pizza/11EE7D610CF7E265B7C72BE5AE757CA7.webp',
 	categoryId: 1,
 	ingredients: {
-		connect: ingredients.slice(5, 10),
+		connect: _ingredients.slice(5, 10),
 	},
 };
 
@@ -215,7 +215,7 @@ export const pizza_3 = {
 	imageUrl: '/assets/images/pizza/11EE7D61706D472F9A5D71EB94149304.webp',
 	categoryId: 1,
 	ingredients: {
-		connect: ingredients.slice(10, 40),
+		connect: _ingredients.slice(10, 40),
 	},
 };
 
@@ -224,7 +224,7 @@ export const pizza_4 = {
 	imageUrl: '/assets/images/pizza/11EE7D61762B28A4ADBCB9A502D3E644.webp',
 	categoryId: 1,
 	ingredients: {
-		connect: ingredients.slice(10, 20),
+		connect: _ingredients.slice(10, 20),
 	},
 };
 
@@ -233,7 +233,7 @@ export const pizza_5 = {
 	imageUrl: '/assets/images/pizza/11EE7D611F62C45B81E28C4C8B57A356.webp',
 	categoryId: 1,
 	ingredients: {
-		connect: ingredients.slice(0, 15),
+		connect: _ingredients.slice(0, 15),
 	},
 };
 
@@ -242,6 +242,6 @@ export const pizza_6 = {
 	imageUrl: '/assets/images/pizza/11EE7D6149EB101D8727573088FA2EFF.webp',
 	categoryId: 1,
 	ingredients: {
-		connect: ingredients.slice(5, 35),
+		connect: _ingredients.slice(5, 35),
 	},
 };

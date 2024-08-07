@@ -4,6 +4,7 @@ import { ProductExtends } from '@/@types/prisma';
 import { PizzaForm, ProductForm } from '@/shared/components/shared';
 import { Dialog, DialogContent } from '@/shared/components/ui/dialog';
 import { cn } from '@/shared/lib/utils';
+import { useCartStore } from '@/shared/store';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
@@ -14,7 +15,26 @@ interface Props {
 
 export const ModalProduct: React.FC<Props> = ({ product, className }) => {
 	const router = useRouter();
-	const isPizzaForm = Boolean(product.items[0].pizzaType);
+	const firstItem = product.items[0];
+	const isPizzaForm = Boolean(firstItem.pizzaType);
+	const addCartItem = useCartStore((state) => state.addCartItem);
+
+	const onAddProduct = () => {
+		addCartItem({
+			productItemId: firstItem.id,
+		});
+	};
+
+	const onAddPizza = async (productItemId: number, ingredients: number[]) => {
+		try {
+			await addCartItem({
+				productItemId,
+				ingredients,
+			});
+		} catch (error) {
+			console.log('Exception ' + error);
+		}
+	};
 
 	return (
 		<Dialog
@@ -31,11 +51,14 @@ export const ModalProduct: React.FC<Props> = ({ product, className }) => {
 						name={product.name}
 						ingredients={product.ingredients}
 						items={product.items}
+						onSubmit={onAddPizza}
 					/>
 				) : (
 					<ProductForm
 						imageUrl={product.imageUrl}
 						name={product.name}
+						onSubmit={onAddProduct}
+						price={firstItem.price}
 					/>
 				)}
 			</DialogContent>

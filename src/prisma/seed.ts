@@ -1,6 +1,6 @@
 import {
 	categories,
-	ingredients,
+	_ingredients,
 	pizza_1,
 	pizza_2,
 	pizza_3,
@@ -37,7 +37,7 @@ async function up() {
 	});
 
 	await prisma.ingredient.createMany({
-		data: ingredients,
+		data: _ingredients,
 	});
 
 	await prisma.product.createMany({
