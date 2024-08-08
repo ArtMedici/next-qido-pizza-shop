@@ -66,7 +66,7 @@ export const PizzaForm: React.FC<Props> = ({
 				size={size}
 			/>
 
-			<div className="w-[490px] bg-[#f1f1f1] p-7">
+			<div className={cn(className, 'w-[490px] bg-[#f1f1f1] p-7')}>
 				<Title
 					text={name}
 					size="md"
