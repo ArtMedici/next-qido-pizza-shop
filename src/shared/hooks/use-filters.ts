@@ -22,9 +22,12 @@ export interface Filters {
 
 interface ReturnProps extends Filters {
 	setPriceRange: (name: keyof PriceRangeProps, value: number) => void;
+	resetPriceRange: () => void;
 	setPizzaTypes: (value: string) => void;
 	setSizes: (value: string) => void;
+	resetSelectedSizes: () => void;
 	setSelectedIngredients: (value: string) => void;
+	resetSelectedIngredients: () => void;
 }
 
 export const useFilters = (): ReturnProps => {
@@ -33,11 +36,12 @@ export const useFilters = (): ReturnProps => {
 		string
 	>;
 
-	const [selectedIngredients, { toggle: toggleIngredients }] = useSet(
-		new Set<string>(searchParams.get('ingredients')?.split(','))
-	);
+	const [
+		selectedIngredients,
+		{ toggle: toggleIngredients, clear: resetIngredients },
+	] = useSet(new Set<string>(searchParams.get('ingredients')?.split(',')));
 
-	const [sizes, { toggle: toggleSizes }] = useSet(
+	const [sizes, { toggle: toggleSizes, clear: resetSizes }] = useSet(
 		new Set<string>(searchParams.get('sizes')?.split(',') || [])
 	);
 
@@ -57,14 +61,27 @@ export const useFilters = (): ReturnProps => {
 		}));
 	};
 
-	return {
-		sizes,
-		pizzaTypes,
-		selectedIngredients,
-		priceRange,
-		setPriceRange: updatePriceRange,
-		setPizzaTypes: togglePizzaTypes,
-		setSizes: toggleSizes,
-		setSelectedIngredients: toggleIngredients,
+	const resetPriceRange = () => {
+		setPriceRange({
+			priceFrom: undefined,
+			priceTo: undefined,
+		});
 	};
+
+	return React.useMemo(
+		() => ({
+			sizes,
+			pizzaTypes,
+			selectedIngredients,
+			priceRange,
+			setPriceRange: updatePriceRange,
+			resetPriceRange,
+			setPizzaTypes: togglePizzaTypes,
+			setSizes: toggleSizes,
+			resetSelectedSizes: resetSizes,
+			setSelectedIngredients: toggleIngredients,
+			resetSelectedIngredients: resetIngredients,
+		}),
+		[sizes, pizzaTypes, selectedIngredients, priceRange]
+	);
 };

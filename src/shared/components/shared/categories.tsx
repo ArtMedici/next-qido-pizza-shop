@@ -3,6 +3,7 @@
 import { cn } from '@/shared/lib/utils';
 import { useCategoryStore } from '@/shared/store';
 import { Category } from '@prisma/client';
+import Link from 'next/link';
 import React from 'react';
 
 interface Props {
@@ -20,16 +21,16 @@ export const Categories: React.FC<Props> = ({ items, className }) => {
 				className
 			)}>
 			{items.map(({ name, id }, idx) => (
-				<a
+				<Link
 					className={cn(
 						'flex items-center font-bold h-11 px-5 rounded-2xl',
 						categoryActiveId === id &&
 							'bg-white shadow-md shadow-gray-200 text-primary'
 					)}
-					href={`/#${name}`}
+					href={`#${name}`}
 					key={idx}>
 					<button>{name}</button>
-				</a>
+				</Link>
 			))}
 		</div>
 	);

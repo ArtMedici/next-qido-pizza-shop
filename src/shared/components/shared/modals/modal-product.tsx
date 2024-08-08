@@ -7,6 +7,8 @@ import { cn } from '@/shared/lib/utils';
 import { useCartStore } from '@/shared/store';
 import { useRouter } from 'next/navigation';
 import React from 'react';
+import toast from 'react-hot-toast';
+import async from '../../../../app/(home)/@modal/(.)product/[id]/page';
 
 interface Props {
 	product: ProductExtends;
@@ -17,21 +19,27 @@ export const ModalProduct: React.FC<Props> = ({ product, className }) => {
 	const router = useRouter();
 	const firstItem = product.items[0];
 	const isPizzaForm = Boolean(firstItem.pizzaType);
-	const addCartItem = useCartStore((state) => state.addCartItem);
+	const [addCartItem, loading] = useCartStore((state) => [
+		state.addCartItem,
+		state.loading,
+	]);
 
-	const onAddProduct = () => {
-		addCartItem({
-			productItemId: firstItem.id,
-		});
-	};
-
-	const onAddPizza = async (productItemId: number, ingredients: number[]) => {
+	const onSubmit = async (productItemId?: number, ingredients?: number[]) => {
 		try {
+			const itemId = productItemId ?? firstItem.id;
+
 			await addCartItem({
-				productItemId,
+				productItemId: itemId,
 				ingredients,
 			});
+			toast.success(
+				`${isPizzaForm ? 'Пицца добавлена' : 'Продукт добавлен'}  в корзину`
+			);
+			router.back();
 		} catch (error) {
+			toast.error(
+				`Не удалось добавить ${isPizzaForm ? 'пиццу' : 'продукт'} в корзину`
+			);
 			console.log('Exception ' + error);
 		}
 	};
@@ -51,14 +59,16 @@ export const ModalProduct: React.FC<Props> = ({ product, className }) => {
 						name={product.name}
 						ingredients={product.ingredients}
 						items={product.items}
-						onSubmit={onAddPizza}
+						onSubmit={onSubmit}
+						loading={loading}
 					/>
 				) : (
 					<ProductForm
 						imageUrl={product.imageUrl}
 						name={product.name}
-						onSubmit={onAddProduct}
+						onSubmit={onSubmit}
 						price={firstItem.price}
+						loading={loading}
 					/>
 				)}
 			</DialogContent>

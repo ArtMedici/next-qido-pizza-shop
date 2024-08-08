@@ -5,6 +5,7 @@ import {
 	FilterCheckboxProps,
 } from '@/shared/components/shared/filter-checkbox';
 import { Input, Skeleton } from '@/shared/components/ui';
+import { cn } from '@/shared/lib/utils';
 import React from 'react';
 
 type Item = FilterCheckboxProps;
@@ -15,7 +16,9 @@ interface Props {
 	limit?: number;
 	loading?: boolean;
 	searchInputPlaceholder?: string;
+	hasResetButton?: boolean;
 	onClickCheckbox?: (id: string) => void;
+	resetCheckboxes?: () => void;
 	defaultValue?: string[];
 	selected?: Set<string>;
 	className?: string;
@@ -28,7 +31,9 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
 	limit = 5,
 	loading,
 	searchInputPlaceholder = 'Поиск...',
+	hasResetButton = false,
 	onClickCheckbox,
+	resetCheckboxes,
 	defaultValue,
 	selected,
 	className,
@@ -82,7 +87,16 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
 
 	return (
 		<div className={className}>
-			<p className="font-bold mb-3">{title}</p>
+			<div className="flex justify-between mb-3">
+				<p className="font-bold">{title}</p>
+				{hasResetButton && selected && selected.size >= 1 && (
+					<button
+						onClick={resetCheckboxes}
+						className="text-primary">
+						{'Сбросить'}
+					</button>
+				)}
+			</div>
 
 			{showAll && (
 				<div className="mb-5">
@@ -108,7 +122,11 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
 				))}
 			</div>
 			{items.length > limitItems && (
-				<div className={showAll ? 'border-t border-t-neutral-100 mt-4' : ''}>
+				<div
+					className={cn(
+						showAll ? 'border-t border-t-neutral-100 mt-4' : '',
+						'flex justify-between'
+					)}>
 					<button
 						onClick={() => setShowAll(!showAll)}
 						className="text-primary mt-3">
