@@ -5,10 +5,11 @@ import { CreateCartItemValues } from '@/shared/services/dto/cart.dto';
 import { create } from 'zustand';
 
 export interface CartState {
-	loading: boolean;
-	error: boolean;
-	totalAmount: number;
 	items: CartStateItem[];
+	totalAmount: number;
+	error: boolean;
+	loading: boolean;
+	updatingItemId: number | null;
 	fetchCartItems: () => Promise<void>;
 	updateItemQuantity: (id: number, quantity: number) => Promise<void>;
 	addCartItem: (values: any) => Promise<void>;
@@ -19,6 +20,7 @@ export const useCartStore = create<CartState>((set, get) => ({
 	items: [],
 	error: false,
 	loading: true,
+	updatingItemId: null,
 	totalAmount: 0,
 
 	fetchCartItems: async () => {
@@ -35,14 +37,14 @@ export const useCartStore = create<CartState>((set, get) => ({
 	},
 	updateItemQuantity: async (id: number, quantity: number) => {
 		try {
-			set({ loading: true, error: false });
+			set({ updatingItemId: id, error: false });
 			const data = await Api.cart.updateItemQuantity(id, quantity);
 			set(getCartDetails(data));
 		} catch (error) {
 			console.error(error);
 			set({ error: true });
 		} finally {
-			set({ loading: false });
+			set({ updatingItemId: null });
 		}
 	},
 	addCartItem: async (values: CreateCartItemValues) => {
@@ -60,7 +62,7 @@ export const useCartStore = create<CartState>((set, get) => ({
 	removeCartItem: async (id: number) => {
 		try {
 			set((state) => ({
-				loading: true,
+				updatingItemId: id,
 				error: false,
 				items: state.items.map((item) =>
 					item.id === id ? { ...item, disabled: true } : item
@@ -73,7 +75,7 @@ export const useCartStore = create<CartState>((set, get) => ({
 			set({ error: true });
 		} finally {
 			set((state) => ({
-				loading: false,
+				updatingItemId: null,
 				items: state.items.map((item) => ({ ...item, disabled: false })),
 			}));
 		}

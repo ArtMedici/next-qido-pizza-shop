@@ -10,7 +10,7 @@ import {
 	Title,
 } from '@/shared/components/shared';
 import { Button } from '@/shared/components/ui';
-import { PizzaSize, pizzaSizes, PizzaType } from '@/shared/constants/pizza';
+import { PizzaSize, pizzaSizes, PizzaType } from '@/shared/constants';
 import { cn } from '@/shared/lib/utils';
 import { getPizzaDetails } from '@/shared/lib';
 import { usePizzaOptions } from '@/shared/hooks';

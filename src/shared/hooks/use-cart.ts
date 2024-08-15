@@ -1,24 +1,26 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 
 import { getNoun } from '@/shared/lib';
 import { useCartStore } from '@/shared/store';
 import { CreateCartItemValues } from '@/shared/services/dto/cart.dto';
 import { CartStateItem } from '@/shared/lib/get-cart-details';
-import { updateItemQuantity } from '@/shared/services/cart';
+
+export type OnClickCountButtonType = (
+	id: number,
+	quantity: number,
+	type: 'plus' | 'minus'
+) => void;
 
 type ReturnProps = {
 	totalAmount: number;
 	items: CartStateItem[];
-	loading: boolean;
 	productNoun: string;
+	loading: boolean;
+	updatingItemId: number | null;
 	updateItemQuantity: (id: number, quantity: number) => void;
 	removeCartItem: (id: number) => void;
 	addCartItem: (values: CreateCartItemValues) => void;
-	onClickCountButton: (
-		id: number,
-		quantity: number,
-		type: 'plus' | 'minus'
-	) => void;
+	onClickCountButton: OnClickCountButtonType;
 };
 
 export const useCart = (): ReturnProps => {

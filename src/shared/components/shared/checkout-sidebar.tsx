@@ -1,5 +1,5 @@
 import { CheckoutItemDetails, WhiteBlock } from '@/shared/components/shared';
-import { Button } from '@/shared/components/ui';
+import { Button, Skeleton } from '@/shared/components/ui';
 import { cn } from '@/shared/lib/utils';
 import { ArrowRight, Package, Percent, Truck } from 'lucide-react';
 import React from 'react';
@@ -9,11 +9,13 @@ const DELIVERY_PRICE = 250;
 
 interface Props {
 	totalAmount: number;
+	loading?: boolean;
 	className?: string;
 }
 
 export const CheckoutSidebar: React.FC<Props> = ({
 	totalAmount,
+	loading,
 	className,
 }) => {
 	const taxPrice = (totalAmount * TAX) / 100;
@@ -23,7 +25,11 @@ export const CheckoutSidebar: React.FC<Props> = ({
 		<WhiteBlock className={(cn('p-6 sticky top-4'), className)}>
 			<div className="flex flex-col gap-1">
 				<span className="text-xl">Итого:</span>
-				<span className="text-3xl font-extrabold">{totalPrice} ₽</span>
+				{loading ? (
+					<Skeleton className="h-11 w-48" />
+				) : (
+					<span className="h-11 text-3xl font-extrabold">{totalPrice} ₽</span>
+				)}
 			</div>
 
 			<CheckoutItemDetails
@@ -36,7 +42,13 @@ export const CheckoutSidebar: React.FC<Props> = ({
 						Стоимость корзины:
 					</div>
 				}
-				price={totalAmount}
+				price={
+					loading ? (
+						<Skeleton className="h-7 w-16 rounded-[8px]" />
+					) : (
+						`${totalAmount} ₽`
+					)
+				}
 			/>
 			<CheckoutItemDetails
 				title={
@@ -48,7 +60,13 @@ export const CheckoutSidebar: React.FC<Props> = ({
 						Налог:
 					</div>
 				}
-				price={taxPrice}
+				price={
+					loading ? (
+						<Skeleton className="h-7 w-16 rounded-[8px]" />
+					) : (
+						`${taxPrice} ₽`
+					)
+				}
 			/>
 			<CheckoutItemDetails
 				title={
@@ -60,7 +78,13 @@ export const CheckoutSidebar: React.FC<Props> = ({
 						Доставка:
 					</div>
 				}
-				price={DELIVERY_PRICE}
+				price={
+					loading ? (
+						<Skeleton className="h-7 w-16 rounded-[8px]" />
+					) : (
+						`${DELIVERY_PRICE} ₽`
+					)
+				}
 			/>
 
 			<Button

@@ -27,6 +27,7 @@ export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
 		totalAmount,
 		items,
 		productNoun,
+		updatingItemId,
 		removeCartItem,
 		onClickCountButton,
 	} = useCart();
@@ -98,7 +99,7 @@ export const CartDrawer: React.FC<React.PropsWithChildren> = ({ children }) => {
 											name={item.name}
 											price={item.price}
 											quantity={item.quantity}
-											disabled={item.disabled}
+											disabled={item.disabled || updatingItemId === item.id}
 											onClickUpdateQuantity={(type) =>
 												onClickCountButton(item.id, item.quantity, type)
 											}

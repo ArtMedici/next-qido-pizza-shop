@@ -24,4 +24,8 @@ export { CheckoutItemDetails } from './checkout-item-details';
 export { CheckoutItem } from './checkout-item';
 export { CheckoutItemSkeleton } from './checkout-item-skeleton';
 export { CheckoutSidebar } from './checkout-sidebar';
+export { ErrorText } from './error-text';
+export { ClearButton } from './clear-button';
+export * from './checkout';
+export * from './checkout-form';
 export * from './modals';
