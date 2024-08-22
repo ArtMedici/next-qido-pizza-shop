@@ -29,3 +29,4 @@ export { ClearButton } from './clear-button';
 export * from './checkout';
 export * from './checkout-form';
 export * from './modals';
+export * from './email-template';
