@@ -13,6 +13,8 @@ import {
 } from "@/shared/components/shared";
 import { useSearchParams } from "next/navigation";
 import { notifyOrderStatus, notifyVerifiedProfile } from "@/shared/lib";
+import { useHeaderStore } from "@/shared/store";
+import { useIntersection } from "react-use";
 
 interface Props {
   hasSearch?: boolean;
@@ -25,8 +27,22 @@ export const Header: React.FC<Props> = ({
   hasCart = true,
   className,
 }) => {
+  const setIsHiddenHeader = useHeaderStore((state) => state.setIsHidden);
+  const intersectionRef = React.useRef(null);
+  const intersection = useIntersection(intersectionRef, {
+    threshold: 0,
+  });
+
   const searchParams = useSearchParams();
   const [openAuthModal, setOpenAuthModal] = React.useState(false);
+
+  React.useEffect(() => {
+    if (!intersection?.isIntersecting) {
+      setIsHiddenHeader(true);
+    } else {
+      setIsHiddenHeader(false);
+    }
+  }, [intersection?.isIntersecting, setIsHiddenHeader]);
 
   React.useEffect(() => {
     if (searchParams.has("paid")) {
@@ -39,15 +55,18 @@ export const Header: React.FC<Props> = ({
   }, [searchParams]);
 
   return (
-    <header className={cn("border-b border-gray-100", className)}>
+    <header
+      ref={intersectionRef}
+      className={cn("border-b border-gray-100", className)}
+    >
       <Container className="flex items-center justify-between py-8">
         <Link href="/">
           <div className="flex items-center gap-4">
             <Image src="/logo.png" width={35} height={35} alt="Logo" />
             <div>
-              <h1 className="text-2xl uppercase font-black">QIDO</h1>
+              <h1 className="text-2xl uppercase font-black">QIDO Пицца</h1>
               <p className="text-sm text-gray-400 leading-3">
-                вкусней уже некуда
+                тестовая пиццерия
               </p>
             </div>
           </div>

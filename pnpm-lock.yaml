@@ -89,6 +89,9 @@ importers:
       react-imask:
         specifier: ^7.6.1
         version: 7.6.1(react@18.3.1)
+      react-insta-stories:
+        specifier: ^2.7.0
+        version: 2.7.0(react@18.3.1)
       react-use:
         specifier: ^17.5.1
         version: 17.5.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2367,6 +2370,11 @@ packages:
     engines: {npm: '>=4.0.0'}
     peerDependencies:
       react: '>=0.14.0'
+
+  react-insta-stories@2.7.0:
+    resolution: {integrity: sha512-pCPHzC323b9Ttvr8ByLrX/iH/ft/L3ThWGDJPKdvHnaWdR5dhFkonrQ0/KNiEIH5t539dNyFPevLJUOobkD2WQ==}
+    peerDependencies:
+      react: '>=16.8.2'
 
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
@@ -5218,6 +5226,10 @@ snapshots:
     dependencies:
       imask: 7.6.1
       prop-types: 15.8.1
+      react: 18.3.1
+
+  react-insta-stories@2.7.0(react@18.3.1):
+    dependencies:
       react: 18.3.1
 
   react-is@16.13.1: {}

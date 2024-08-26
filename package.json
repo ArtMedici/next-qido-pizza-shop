@@ -7,9 +7,10 @@
     "build": "next build",
     "start": "cross-env NODE_ENV=production next start",
     "lint": "next lint",
-    "prisma:push": "prisma db push --schema='src/prisma/schema.prisma'",
-    "prisma:studio": "prisma studio --schema='src/prisma/schema.prisma'",
-    "prisma:seed": "prisma db seed"
+    "prisma:push": "prisma db push --schema=src/prisma/schema.prisma",
+    "prisma:studio": "prisma studio --schema=src/prisma/schema.prisma",
+    "prisma:seed": "prisma db seed",
+    "postinstall": "prisma generate"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} src/prisma/seed.ts"
@@ -42,6 +43,7 @@
     "react-hook-form": "^7.52.2",
     "react-hot-toast": "^2.4.1",
     "react-imask": "^7.6.1",
+    "react-insta-stories": "^2.7.0",
     "react-use": "^17.5.1",
     "resend": "^4.0.0",
     "tailwind-merge": "^2.4.0",
