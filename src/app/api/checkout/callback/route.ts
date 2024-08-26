@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
     if (isSucceeded) {
       await sendEmail(
         order.email,
-        "QIDO Пицца | Зака успешно оформлен",
+        "QIDO Пицца | Заказ успешно оформлен",
         OrderSuccessTemplate({ orderId: order.id, items }),
       );
 

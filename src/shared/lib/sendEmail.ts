@@ -10,9 +10,8 @@ export const sendEmail = async (
 
   const { data, error } = await resend.emails.send({
     from: "onboarding@resend.dev",
-    to: ["delivered@resend.dev"],
-    subject: "Hello world",
-    text: "",
+    to,
+    subject,
     react: template,
   });
 
