@@ -1,23 +1,23 @@
-import React from 'react';
-import { Filters } from '@/shared/hooks/use-filters';
-import qs from 'qs';
-import { useRouter } from 'next/navigation';
+import React from "react";
+import { Filters } from "@/shared/hooks/use-filters";
+import qs from "qs";
+import { useRouter } from "next/navigation";
 
 export const useQueryFilters = (filters: Filters) => {
-	const router = useRouter();
+  const router = useRouter();
 
-	React.useEffect(() => {
-		const params = {
-			...filters.priceRange,
-			pizzaTypes: Array.from(filters.pizzaTypes),
-			sizes: Array.from(filters.sizes),
-			ingredients: Array.from(filters.selectedIngredients),
-		};
+  React.useEffect(() => {
+    const params = {
+      ...filters.priceRange,
+      pizzaTypes: Array.from(filters.pizzaTypes),
+      sizes: Array.from(filters.sizes),
+      ingredients: Array.from(filters.selectedIngredients),
+    };
 
-		const query = qs.stringify(params, {
-			arrayFormat: 'comma',
-		});
+    const query = qs.stringify(params, {
+      arrayFormat: "comma",
+    });
 
-		router.push(`?${query}`, { scroll: false });
-	}, [filters]);
+    router.push(`?${query}`, { scroll: false });
+  }, [filters]);
 };

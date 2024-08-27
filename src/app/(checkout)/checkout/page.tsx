@@ -14,13 +14,14 @@ import {
   Title,
 } from "@/shared/components";
 import { checkoutFormSchema, CheckoutFormValues } from "@/shared/constants";
-import { createOrder } from "@/app/actions";
+import { createOrder, isEmptyCart } from "@/app/actions";
 import toast from "react-hot-toast";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Api } from "@/shared/services/api-client";
 import { useSession } from "next-auth/react";
 
 export default function CheckoutPage() {
+  const router = useRouter();
   const [submitting, setSubmitting] = React.useState(false);
   const {
     totalAmount,
@@ -33,7 +34,15 @@ export default function CheckoutPage() {
   } = useCart();
   const { data: session } = useSession();
 
-  if (items.length === 0 || totalAmount === 0) redirect("/");
+  React.useEffect(() => {
+    const checkCartIsEmpty = async () => {
+      const isEmpty = await isEmptyCart();
+
+      if (isEmpty) router.push("/");
+    };
+
+    checkCartIsEmpty();
+  }, [router]);
 
   const form = useForm<CheckoutFormValues>({
     resolver: zodResolver(checkoutFormSchema),

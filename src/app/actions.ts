@@ -12,6 +12,24 @@ import { OrderStatus, Prisma } from "@prisma/client";
 import { getUserSession } from "@/lib/get-user-session";
 import { hashSync } from "bcrypt";
 
+export async function isEmptyCart() {
+  const cookieStore = cookies();
+  const cartToken = cookieStore.get("cartToken")?.value;
+  if (!cartToken) {
+    throw new Error("Cart token not found");
+  }
+  const userCart = await prisma.cart.findFirst({
+    where: {
+      token: cartToken,
+    },
+  });
+  if (!userCart) {
+    throw new Error("Cart not found");
+  }
+
+  return userCart.totalAmount === 0;
+}
+
 export async function createOrder(data: CheckoutFormValues) {
   try {
     const cookieStore = cookies();

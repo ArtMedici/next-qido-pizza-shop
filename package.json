@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development next dev",
-    "build": "next build",
+    "build": "cross-env NEXT_SHARP_PATH=/tmp/node_modules/sharp next build",
     "start": "cross-env NODE_ENV=production next start",
     "lint": "next lint",
     "prisma:push": "prisma db push --schema=src/prisma/schema.prisma",
@@ -46,6 +46,7 @@
     "react-insta-stories": "^2.7.0",
     "react-use": "^17.5.1",
     "resend": "^4.0.0",
+    "sharp": "^0.33.5",
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^0.9.1",
