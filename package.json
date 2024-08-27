@@ -10,7 +10,7 @@
     "prisma:push": "prisma db push --schema=src/prisma/schema.prisma",
     "prisma:studio": "prisma studio --schema=src/prisma/schema.prisma",
     "prisma:seed": "prisma db seed",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate --schema=src/prisma/schema.prisma"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} src/prisma/seed.ts"
