@@ -3,7 +3,12 @@
 import { CheckoutFormValues } from "@/shared/constants";
 import { prisma } from "@/prisma/prisma-client";
 import { cookies } from "next/headers";
-import { calcOrderPrice, createPayment, sendEmail } from "@/shared/lib";
+import {
+  calcOrderPrice,
+  createPayment,
+  getPaymentDetails,
+  sendEmail,
+} from "@/shared/lib";
 import {
   PayOrderTemplate,
   VerificationUserTemplate,
@@ -154,6 +159,8 @@ export async function getOrderStatus() {
       throw new Error("Payment token not found");
     }
 
+    const paymentDetail = await getPaymentDetails(paymentToken);
+
     const order = await prisma.order.findFirst({
       where: {
         token: cartToken,
@@ -165,14 +172,33 @@ export async function getOrderStatus() {
       throw new Error("Order not found");
     }
 
-    if (
-      order.status === OrderStatus.SUCCEEDED ||
-      order.status === OrderStatus.CANCELLED
-    ) {
-      cookieStore.delete("paymentToken");
-    }
+    if (paymentDetail.status === "succeeded") {
+      await prisma.order.update({
+        where: {
+          id: order.id,
+        },
+        data: {
+          status: OrderStatus.SUCCEEDED,
+        },
+      });
 
-    return order.status;
+      cookieStore.delete("paymentToken");
+      return OrderStatus.SUCCEEDED;
+    } else if (paymentDetail.status === "canceled") {
+      await prisma.order.update({
+        where: {
+          id: order.id,
+        },
+        data: {
+          status: OrderStatus.CANCELLED,
+        },
+      });
+
+      cookieStore.delete("paymentToken");
+      return OrderStatus.CANCELLED;
+    } else if (paymentDetail.status === "pending") {
+      return OrderStatus.PENDING;
+    }
   } catch (error) {
     console.log("Error [GetOrderStatus] ", error);
     throw error;

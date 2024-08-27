@@ -10,7 +10,7 @@ export const sendEmail = async (
 
   const { data, error } = await resend.emails.send({
     from: "onboarding@resend.dev",
-    to,
+    to: process.env.RESEND_EMAIL_TEST === "true" ? "delivered@resend.dev" : to,
     subject,
     react: template,
   });

@@ -79,13 +79,18 @@ export default function CheckoutPage() {
 
       const paymentUrl = await createOrder(data);
 
+      if (!paymentUrl) {
+        setSubmitting(false);
+        toast.error("Не удалось создать заказ", {
+          duration: 6000,
+        });
+        return router.push("/");
+      }
+
       toast.success("Переход к оплате заказа...", {
         icon: "✅",
       });
-
-      if (paymentUrl) {
-        location.href = paymentUrl;
-      }
+      location.href = paymentUrl;
     } catch (err) {
       console.log(err);
 
