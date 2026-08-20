@@ -3,6 +3,8 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+import { LayoutDashboard } from "lucide-react";
 import { cn } from "@/shared/lib/utils";
 import {
   AuthModal,
@@ -11,6 +13,7 @@ import {
   ProfileButton,
   SearchInput,
 } from "@/shared/components/shared";
+import { Button } from "@/components/ui";
 import { useSearchParams } from "next/navigation";
 import { notifyOrderStatus, notifyVerifiedProfile } from "@/shared/lib";
 import { useHeaderStore } from "@/shared/store";
@@ -35,6 +38,8 @@ export const Header: React.FC<Props> = ({
 
   const searchParams = useSearchParams();
   const [openAuthModal, setOpenAuthModal] = React.useState(false);
+  const { data: session } = useSession();
+  const isAdmin = session?.user?.role === "ADMIN";
 
   React.useEffect(() => {
     if (!intersection?.isIntersecting) {
@@ -83,6 +88,15 @@ export const Header: React.FC<Props> = ({
             open={openAuthModal}
             onClose={() => setOpenAuthModal(false)}
           />
+
+          {isAdmin && (
+            <Link href="/dashboard">
+              <Button variant="outline" className="flex items-center gap-1.5">
+                <LayoutDashboard size={16} />
+                Админка
+              </Button>
+            </Link>
+          )}
 
           <ProfileButton onClickSignIn={() => setOpenAuthModal(true)} />
 

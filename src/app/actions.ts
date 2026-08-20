@@ -205,7 +205,12 @@ export async function getOrderStatus() {
   }
 }
 
-export async function updateUserInfo(body: Prisma.UserUpdateInput) {
+export async function updateUserInfo(body: {
+  fullName: string;
+  email: string;
+  password?: string;
+  phone?: string;
+}) {
   try {
     const currentUser = await getUserSession();
 
@@ -226,8 +231,9 @@ export async function updateUserInfo(body: Prisma.UserUpdateInput) {
       data: {
         fullName: body.fullName,
         email: body.email,
+        phone: body.phone || null,
         password: body.password
-          ? hashSync(body.password as string, 10)
+          ? hashSync(body.password, 10)
           : findUser?.password,
       },
     });

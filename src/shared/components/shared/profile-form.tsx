@@ -6,8 +6,8 @@ import { User } from "@prisma/client";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  formRegisterSchema,
-  TFormRegisterValues,
+  formProfileSchema,
+  TFormProfileValues,
 } from "@/shared/components/shared/modals/auth-modal/forms/schemas";
 import toast from "react-hot-toast";
 import { signOut } from "next-auth/react";
@@ -20,21 +20,23 @@ interface Props {
 
 export const ProfileForm: React.FC<Props> = ({ data }) => {
   const form = useForm({
-    resolver: zodResolver(formRegisterSchema),
+    resolver: zodResolver(formProfileSchema),
     defaultValues: {
       fullName: data.fullName,
       email: data.email,
+      phone: data.phone ?? "",
       password: "",
       confirmPassword: "",
     },
   });
 
-  const onSubmit = async (data: TFormRegisterValues) => {
+  const onSubmit = async (data: TFormProfileValues) => {
     try {
       await updateUserInfo({
         email: data.email,
         fullName: data.fullName,
         password: data.password,
+        phone: data.phone,
       });
 
       toast.success("Данные обновлены 📝", {
@@ -64,6 +66,14 @@ export const ProfileForm: React.FC<Props> = ({ data }) => {
         >
           <FormInput name="email" label="E-Mail" required />
           <FormInput name="fullName" label="Полное имя" required />
+
+          <FormInput
+            name="phone"
+            label="Номер телефона"
+            isMask
+            maskTemplate="+7 (000) 000-00-00"
+            placeholder="+7 (000) 000-00-00"
+          />
 
           <FormInput
             type="password"
